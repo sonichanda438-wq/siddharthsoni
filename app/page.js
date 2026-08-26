@@ -65,7 +65,7 @@ function ScrollProgress({ containerRef, springOptions = DEFAULT_SPRING_OPTIONS }
 function DynamicReviewCard({ rev, index }) {
   const scrollRef = useRef(null);
   const stars = Math.max(0, Math.min(5, parseInt(rev["Star Rating"], 10) || 5));
-  const imageUrl = rev["Your Photo"]?.trim() || "/MyImages/rahul.png";
+  const imageUrl = rev["Your Photo"]?.trim() || "/MyImages/rahul.webp";
 
   return (
     <div key={`dyn-${index}`} className="anim-card relative rounded-[2rem] overflow-hidden shrink-0 snap-center w-[85vw] max-w-[360px] opacity-0 translate-y-[30px] duration-700 transition-all">
@@ -145,6 +145,7 @@ export default function Portfolio() {
   }, []);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isAudioLoading, setIsAudioLoading] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const audioRef = useRef(null);
   const canvasRef = useRef(null);
@@ -155,14 +156,17 @@ export default function Portfolio() {
   const subtitleWords = "I specialize in building lightning-fast, high-converting websites and modern UI layouts with smooth animations.".split(" ");
 
   const songs = [
-    "/MySongs/Kinna Sona.mp3",
-    "/MySongs/Pehli Baar.mp3",
-    "/MySongs/O Saathi (From Baaghi 2).mp3",
-    "/MySongs/Raftaarein.mp3",
-    "/MySongs/Love_me_like_you_do_-_love_me_li....mp3",
-    "/MySongs/One Two Three Four (Get On The D....mp3",
-    "/MySongs/Pal Pal Dil Ke Paas (From Blackmail....mp3",
-    "/MySongs/Housefull_2_-_Do_U_Know_(mp3.p....mp3"
+    "/MySongs/kinna_sona.mp3",
+    "/MySongs/pehli_baar.mp3",
+    "/MySongs/o_saathi.mp3",
+    "/MySongs/raftaarein.mp3",
+    "/MySongs/love_me.mp3",
+    "/MySongs/one_two.mp3",
+    "/MySongs/pal_pal.mp3",
+    "/MySongs/housefull.mp3",
+    "/MySongs/Perfect.mp3",
+    "/MySongs/Señorita.mp3",
+    "/MySongs/Imagine Dragons.mp3"
   ];
 
   useEffect(() => {
@@ -195,11 +199,14 @@ export default function Portfolio() {
       setIsPlaying(false);
     } else {
       try {
+        setIsAudioLoading(true); // लोडिंग शुरू
         await audioRef.current.play();
         setIsPlaying(true);
       } catch (e) {
         console.log("Play blocked by mobile browser:", e);
         setIsPlaying(false);
+      } finally {
+        setIsAudioLoading(false); // लोडिंग ख़त्म
       }
     }
   };
@@ -245,7 +252,7 @@ useEffect(() => {
 
   const frameCount = 156;
   const currentFrame = (index) =>
-    `/scroll-frames/ezgif-frame-${String(index + 1).padStart(3, "0")}.png`;
+    `/scroll-frames/ezgif-frame-${String(index + 1).padStart(3, "0")}.webp`;
 
   const sequence = { frame: 0 };
   let collapseStartFrame = 0;
@@ -482,7 +489,7 @@ useEffect(() => {
       const gfData = new URLSearchParams();
       gfData.append("entry.1237936850", messageText);
 
-      await Promise.allSettled([
+      await Promise.all([
         fetch("https://formspree.io/f/moeapbyy", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -500,6 +507,7 @@ useEffect(() => {
       showSuccess("Thank You! Your message has been sent.");
     } catch (error) {
       console.error(error);
+      alert("There was an error submitting your message. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -529,7 +537,7 @@ useEffect(() => {
       gfData.append("entry.740721479", modalRating.toString());
       gfData.append("entry.601522081", combinedFeedback);
 
-      await Promise.allSettled([
+      await Promise.all([
         fetch("https://formspree.io/f/mwlewzyg", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -558,6 +566,7 @@ useEffect(() => {
       showSuccess("Thank You! Your review has been submitted.");
     } catch (error) {
       console.error(error);
+      alert("There was an error submitting your review. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -894,7 +903,7 @@ useEffect(() => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="anim-card group flex flex-col bg-surface-container-low/90 backdrop-blur-md rounded-2xl overflow-hidden border border-border-color opacity-0 translate-y-[30px] duration-700 relative">
                 <div className="relative h-[240px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/ui-ux-layout.png')" }}></div>
+                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/ui-ux-layout.webp')" }}></div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow bg-surface-container-low">
                   <h3 className="font-headline-md text-[24px] text-white mb-2 font-semibold">Custom UI/UX & Layout</h3>
@@ -904,7 +913,7 @@ useEffect(() => {
 
               <div className="anim-card group flex flex-col bg-surface-container-low/90 backdrop-blur-md rounded-2xl overflow-hidden border border-border-color opacity-0 translate-y-[30px] duration-700 relative">
                 <div className="relative h-[240px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/js-experience.png')" }}></div>
+                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/js-experience.webp')" }}></div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow bg-surface-container-low">
                   <h3 className="font-headline-md text-[24px] text-white mb-2 font-semibold">Interactive JS Experience</h3>
@@ -914,7 +923,7 @@ useEffect(() => {
 
                             <div className="anim-card group flex flex-col bg-surface-container-low/90 backdrop-blur-md rounded-2xl overflow-hidden border border-border-color opacity-0 translate-y-[30px] duration-700 relative">
                 <div className="relative h-[240px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/wordpress-project.png')" }}></div>
+                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/wordpress-project.webp')" }}></div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow bg-surface-container-low">
                   <h3 className="font-headline-md text-[24px] text-white mb-2 font-semibold">WordPress Customization</h3>
@@ -924,7 +933,7 @@ useEffect(() => {
 
               <div id="timeout-project" className="anim-card group flex flex-col bg-surface-container-low/90 backdrop-blur-md rounded-2xl overflow-hidden border border-border-color opacity-0 translate-y-[30px] duration-700 relative mt-8 md:mt-0">
                 <div className="relative h-[240px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/timeout-cafe.png')" }}></div>
+                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/timeout-cafe.webp')" }}></div>
                   <div className="absolute top-4 right-4 z-20"><span className="px-3 py-1 bg-black/60 text-primary backdrop-blur-md rounded-full font-code-sm text-[11px] border border-primary/30 uppercase tracking-widest font-bold">LATEST PROJECT</span></div>
                   </div>
                 <div className="p-6 flex flex-col flex-grow bg-surface-container-low">
@@ -980,7 +989,7 @@ useEffect(() => {
               <div className="anim-card relative rounded-[2rem] overflow-hidden shrink-0 snap-center w-[85vw] max-w-[360px] opacity-0 translate-y-[30px] duration-700 transition-all">
                 <div className="bg-surface-container-low/90 backdrop-blur-md border border-border-color rounded-[2rem] p-6 flex flex-col gap-5 h-[320px] relative">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Rahul" className="w-full h-full object-cover" src="/MyImages/rahul.png"/></div>
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Rahul" className="w-full h-full object-cover" src="/MyImages/rahul.webp"/></div>
                     <div className="flex flex-col"><span className="font-headline-md text-[18px] text-white font-semibold">Rahul Sharma</span><span className="font-code-sm text-[12px] text-primary">Cafe Owner, Jaipur</span></div>
                   </div>
                   <div className="flex text-primary">{[1,2,3,4,5].map(n=><span key={n} className="material-symbols-outlined text-[18px]" style={{fontVariationSettings:"'FILL' 1"}}>star</span>)}</div>
@@ -998,7 +1007,7 @@ useEffect(() => {
               <div className="anim-card relative rounded-[2rem] overflow-hidden shrink-0 snap-center w-[85vw] max-w-[360px] opacity-0 translate-y-[30px] duration-700 transition-all">
                 <div className="bg-surface-container-low/90 backdrop-blur-md border border-border-color rounded-[2rem] p-6 flex flex-col gap-5 h-[320px] relative">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Emily" className="w-full h-full object-cover" src="/MyImages/emily.png"/></div>
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Emily" className="w-full h-full object-cover" src="/MyImages/emily.webp"/></div>
                     <div className="flex flex-col"><span className="font-headline-md text-[18px] text-white font-semibold">Emily Chen</span><span className="font-code-sm text-[12px] text-primary">Startup Founder</span></div>
                   </div>
                   <div className="flex text-primary">{[1,2,3,4,5].map(n=><span key={n} className="material-symbols-outlined text-[18px]" style={{fontVariationSettings:"'FILL' 1"}}>star</span>)}</div>
@@ -1016,7 +1025,7 @@ useEffect(() => {
               <div className="anim-card relative rounded-[2rem] overflow-hidden shrink-0 snap-center w-[85vw] max-w-[360px] opacity-0 translate-y-[30px] duration-700 transition-all">
                 <div className="bg-surface-container-low/90 backdrop-blur-md border border-border-color rounded-[2rem] p-6 flex flex-col gap-5 h-[320px] relative">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Marcus" className="w-full h-full object-cover" src="/MyImages/marcus.png"/></div>
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Marcus" className="w-full h-full object-cover" src="/MyImages/marcus.webp"/></div>
                     <div className="flex flex-col"><span className="font-headline-md text-[18px] text-white font-semibold">Marcus JD</span><span className="font-code-sm text-[12px] text-primary">Creative Director</span></div>
                   </div>
                   <div className="flex text-primary">{[1,2,3,4,5].map(n=><span key={n} className="material-symbols-outlined text-[18px]" style={{fontVariationSettings:"'FILL' 1"}}>star</span>)}</div>
@@ -1180,7 +1189,9 @@ useEffect(() => {
           </button>
           
           <div className="flex flex-col justify-center w-[90px]">
-            <span className="font-label-caps text-[8px] text-primary tracking-widest uppercase mb-0.5">Now Playing</span>
+            <span className="font-label-caps text-[8px] text-primary tracking-widest uppercase mb-0.5">
+              {isAudioLoading ? "LOADING..." : "Now Playing"}
+            </span>
             <div className="marquee-container w-full">
               <span className="marquee-text font-code-sm text-[10px] text-white">
                 {songs[currentSongIndex].split('/').pop().replace('.mp3', '').replace(/_/g, ' ')}
