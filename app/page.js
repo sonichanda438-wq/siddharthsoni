@@ -521,10 +521,18 @@ useEffect(() => {
       if (reviewData.file) {
         const formData = new FormData();
         formData.append("image", reviewData.file);
-        const imgRes = await fetch("/api/upload", {
+                const imgRes = await fetch("/api/upload", {
           method: "POST",
           body: formData
         });
+
+         // Check if the API request failed (e.g., Cloudflare returns 404 HTML instead of JSON)
+        if (!imgRes.ok) {
+          const errorText = await imgRes.text();
+          console.error("Cloudflare API Error:", errorText);
+          throw new Error(`API failed with status: ${imgRes.status}`);
+        }
+
         const imgJson = await imgRes.json();
         if (imgJson.success) imageUrl = imgJson.data.url;
       }
