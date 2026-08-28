@@ -3,7 +3,6 @@ export async function onRequestPost(context) {
     const request = context.request;
     const env = context.env;
 
-    // Get image from frontend
     const formData = await request.formData();
     const image = formData.get("image");
 
@@ -17,7 +16,6 @@ export async function onRequestPost(context) {
       );
     }
 
-    // Get ImgBB API key from Cloudflare environment variable
     const apiKey = env.IMGBB_API_KEY;
 
     if (!apiKey) {
@@ -30,11 +28,9 @@ export async function onRequestPost(context) {
       );
     }
 
-    // Prepare ImgBB upload
     const imgbbFormData = new FormData();
     imgbbFormData.append("image", image);
 
-    // Upload image to ImgBB
     const response = await fetch(
       `https://api.imgbb.com/1/upload?key=${encodeURIComponent(apiKey)}`,
       {
@@ -45,7 +41,6 @@ export async function onRequestPost(context) {
 
     const data = await response.json();
 
-    // ImgBB itself returned an error
     if (!response.ok || !data.success) {
       console.error("ImgBB upload failed:", data);
 
@@ -58,9 +53,23 @@ export async function onRequestPost(context) {
       );
     }
 
-    // Send successful ImgBB response back to website
+    const imageUrl = data?.data?.url || "";
+
+    if (!imageUrl) {
+      return Response.json(
+        {
+          success: false,
+          error: "ImgBB did not return an image URL"
+        },
+        { status: 502 }
+      );
+    }
+
+    // page.js ko public ImgBB image URL milega
     return Response.json({
       success: true,
+      key: imageUrl,
+      imageUrl: imageUrl,
       data: data.data
     });
 

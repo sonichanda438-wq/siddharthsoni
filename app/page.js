@@ -3,7 +3,6 @@
 // GSAP MacBook Scroll Sequence — fixed mobile blank-gap + progressive frame loading
 
 import React, { useEffect, useState, useRef } from "react";
-import Papa from "papaparse";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -123,25 +122,30 @@ export default function Portfolio() {
   const [weather, setWeather] = useState({ temp: "--", icon: "☀️" });
 
   useEffect(() => {
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTlSvAsPemum4cCEFOXNIBQZZw3gYwTz8feK4DhxXcV6hSORxjlglG7_6uScgCDUKVRWR6xLbuZ1y5A/pub?output=csv";
+    let cancelled = false;
 
-    Papa.parse(csvUrl, {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const data = Array.isArray(results.data) ? results.data : [];
-        const validReviews = data.filter(
-          (rev) => rev["Your Name"]?.trim() && rev["Your Review Message"]?.trim()
-        );
+    const loadReviews = async () => {
+      try {
+        const response = await fetch("/api/reviews", { cache: "no-store" });
+        if (!response.ok) throw new Error(`Reviews API failed: ${response.status}`);
 
-        setDynamicReviews(validReviews);
-        setReviewCount(24 + validReviews.length);
-      },
-      error: (error) => {
-        console.error("Reviews CSV fetch failed:", error);
-      },
-    });
+        const result = await response.json();
+        const reviews = Array.isArray(result.reviews) ? result.reviews : [];
+
+        if (!cancelled) {
+          setDynamicReviews(reviews);
+          setReviewCount(24 + reviews.length);
+        }
+      } catch (error) {
+        console.error("Reviews API fetch failed:", error);
+      }
+    };
+
+    loadReviews();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -517,52 +521,47 @@ useEffect(() => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      let imageUrl = "No image uploaded";
+      let imageKey = "";
+
       if (reviewData.file) {
         const formData = new FormData();
         formData.append("image", reviewData.file);
-                const imgRes = await fetch("/api/upload", {
+
+        const imgRes = await fetch("/api/upload", {
           method: "POST",
           body: formData
         });
 
-         // Check if the API request failed (e.g., Cloudflare returns 404 HTML instead of JSON)
-        if (!imgRes.ok) {
-          const errorText = await imgRes.text();
-          console.error("Cloudflare API Error:", errorText);
-          throw new Error(`API failed with status: ${imgRes.status}`);
+        const imgJson = await imgRes.json().catch(() => ({}));
+        if (!imgRes.ok || !imgJson.success) {
+          throw new Error(imgJson.error || `Image upload failed (${imgRes.status})`);
         }
 
-        const imgJson = await imgRes.json();
-        if (imgJson.success) imageUrl = imgJson.data.url;
+        imageKey = imgJson.key || "";
       }
 
-      const combinedFeedback = `${reviewData.feedback} | Image: ${imageUrl}`;
-      
-      const gfData = new URLSearchParams();
-      gfData.append("entry.1735470949", reviewData.name);
-      gfData.append("entry.1323945661", reviewData.email);
-      gfData.append("entry.740721479", modalRating.toString());
-      gfData.append("entry.601522081", combinedFeedback);
-
-      await Promise.all([
-        fetch("https://formspree.io/f/mwlewzyg", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...reviewData, rating: modalRating, imageUrl })
-        }),
-        fetch("https://docs.google.com/forms/d/e/1FAIpQLScbkiAJ8Jjez7eGKzYr7t2PA6Fd_Xlg_3H8_dV3a3oJI7jOkg/formResponse", {
-          method: "POST",
-          mode: "no-cors",
-          body: gfData
+      const reviewRes = await fetch("/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: reviewData.name,
+          email: reviewData.email,
+          rating: modalRating,
+          feedback: reviewData.feedback,
+          imageKey
         })
-      ]);
+      });
+
+      const reviewJson = await reviewRes.json().catch(() => ({}));
+      if (!reviewRes.ok || !reviewJson.success) {
+        throw new Error(reviewJson.error || `Review submission failed (${reviewRes.status})`);
+      }
 
       const newlyAddedReview = {
         "Your Name": reviewData.name,
         "Star Rating": modalRating.toString(),
         "Your Review Message": reviewData.feedback,
-        "Your Photo": imageUrl !== "No image uploaded" ? imageUrl : ""
+        "Your Photo": reviewJson.review?.imageUrl || ""
       };
 
       setDynamicReviews(prev => [...prev, newlyAddedReview]);
@@ -574,7 +573,7 @@ useEffect(() => {
       showSuccess("Thank You! Your review has been submitted.");
     } catch (error) {
       console.error(error);
-      alert("There was an error submitting your review. Please try again later.");
+      alert(error?.message || "There was an error submitting your review. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
