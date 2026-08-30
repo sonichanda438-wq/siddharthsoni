@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://siddharthsoni.pages.dev/sitemap.xml
+
