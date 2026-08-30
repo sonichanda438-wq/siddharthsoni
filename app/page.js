@@ -807,7 +807,7 @@ useEffect(() => {
                 Hire Me
               </a>
               <div className="w-10 h-10 rounded-full border-2 border-primary/50 overflow-hidden shadow-[0_0_15px_rgba(245,158,11,0.3)]">
-                <img alt="Profile" className="w-full h-full object-cover" src="https://i.ibb.co/QF8pR5Wd/IMG-20260606-163321-435.webp" />
+                <img alt="Siddharth Soni - Expert Freelance Website Designer & Developer in Jaipur" className="w-full h-full object-cover" src="https://i.ibb.co/QF8pR5Wd/IMG-20260606-163321-435.webp" />
               </div>
             </div>
           </div>
@@ -836,11 +836,18 @@ useEffect(() => {
                     </div>
                     
                     <h1 className="font-display-xl text-[40px] lg:text-[64px] text-on-surface font-semibold tracking-tight leading-[1.1]">
-                      Siddharth Soni – Expert Freelance Website Designer & Developer
+                      High-Performance Web Developer, <span className="text-primary">Designer</span> & <br/>
+                      <span className={`inline-block min-w-[300px] text-surface-tint transition-all duration-500 ${fadeRole ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[10px]'}`}>
+                        {roles[roleIndex]}
+                      </span>
                     </h1>
 
                     <p className="font-body-lg text-[18px] text-on-surface-variant max-w-2xl leading-relaxed font-light">
-                      Crafting lightning-fast, highly converting custom websites and e-commerce stores in Jaipur and globally.
+                      {subtitleWords.map((word, i) => (
+                        <span key={i} className="inline-block animate-fade-in-up opacity-0" style={{ animationDelay: `${i * 0.04}s`, animationFillMode: 'forwards' }}>
+                          {word}&nbsp;
+                        </span>
+                      ))}
                     </p>
 
                     <div className="flex flex-wrap gap-3 mt-4">
@@ -865,7 +872,7 @@ useEffect(() => {
                   <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px]">
                     <div className="absolute inset-0 rounded-full bg-primary/10 blur-3xl"></div>
                     <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-primary/50 shadow-[0_0_40px_rgba(245,158,11,0.3)] z-20">
-                      <img alt="S.S. Creative" className="w-full h-full object-cover" src="https://i.ibb.co/QF8pR5Wd/IMG-20260606-163321-435.webp" />
+                      <img alt="Siddharth Soni - Expert Freelance Website Designer & Developer in Jaipur" className="w-full h-full object-cover" src="https://i.ibb.co/QF8pR5Wd/IMG-20260606-163321-435.webp" />
                     </div>
                   </div>
                 </div>
@@ -897,13 +904,15 @@ useEffect(() => {
               <span className="font-code-sm text-[14px] text-primary tracking-widest uppercase flex items-center gap-2">
                 <span className="w-4 h-[1px] bg-primary"></span> Expertise & Featured Work
               </span>
-              <h2 className="font-headline-lg text-[32px] text-white font-semibold tracking-tight">Premium Website Design & Development Services</h2>
+              <h2 className="font-headline-lg text-[32px] text-white font-semibold tracking-tight">Featured Projects</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="anim-card group flex flex-col bg-surface-container-low/90 backdrop-blur-md rounded-2xl overflow-hidden border border-border-color opacity-0 translate-y-[30px] duration-700 relative">
                 <div className="relative h-[240px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/ui-ux-layout.webp')" }}></div>
+                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/ui-ux-layout.webp')" }}>
+                    <img src="/MyImages/ui-ux-layout.webp" alt="Custom UI/UX & Layout Website Design by Siddharth Soni in Jaipur" className="sr-only" />
+                  </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow bg-surface-container-low">
                   <h3 className="font-headline-md text-[24px] text-white mb-2 font-semibold">Custom UI/UX & Layout</h3>
@@ -913,7 +922,9 @@ useEffect(() => {
 
               <div className="anim-card group flex flex-col bg-surface-container-low/90 backdrop-blur-md rounded-2xl overflow-hidden border border-border-color opacity-0 translate-y-[30px] duration-700 relative">
                 <div className="relative h-[240px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/js-experience.webp')" }}></div>
+                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/js-experience.webp')" }}>
+                    <img src="/MyImages/js-experience.webp" alt="Interactive JavaScript Website Experience by Siddharth Soni, Website Designer in Jaipur" className="sr-only" />
+                  </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow bg-surface-container-low">
                   <h3 className="font-headline-md text-[24px] text-white mb-2 font-semibold">Interactive JS Experience</h3>
@@ -923,7 +934,9 @@ useEffect(() => {
 
                             <div className="anim-card group flex flex-col bg-surface-container-low/90 backdrop-blur-md rounded-2xl overflow-hidden border border-border-color opacity-0 translate-y-[30px] duration-700 relative">
                 <div className="relative h-[240px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/wordpress-project.webp')" }}></div>
+                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/wordpress-project.webp')" }}>
+                    <img src="/MyImages/wordpress-project.webp" alt="Custom WordPress Website Design by Siddharth Soni, Website Developer in Jaipur" className="sr-only" />
+                  </div>
                 </div>
                 <div className="p-6 flex flex-col flex-grow bg-surface-container-low">
                   <h3 className="font-headline-md text-[24px] text-white mb-2 font-semibold">WordPress Customization</h3>
@@ -933,7 +946,9 @@ useEffect(() => {
 
               <div id="timeout-project" className="anim-card group flex flex-col bg-surface-container-low/90 backdrop-blur-md rounded-2xl overflow-hidden border border-border-color opacity-0 translate-y-[30px] duration-700 relative mt-8 md:mt-0">
                 <div className="relative h-[240px] overflow-hidden">
-                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/timeout-cafe.webp')" }}></div>
+                  <div className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-700" style={{ backgroundImage: "url('/MyImages/timeout-cafe.webp')" }}>
+                    <img src="/MyImages/timeout-cafe.webp" alt="Time Out Cafe Custom Website Design by Siddharth Soni, Website Designer in Jaipur" className="sr-only" />
+                  </div>
                   <div className="absolute top-4 right-4 z-20"><span className="px-3 py-1 bg-black/60 text-primary backdrop-blur-md rounded-full font-code-sm text-[11px] border border-primary/30 uppercase tracking-widest font-bold">LATEST PROJECT</span></div>
                   </div>
                 <div className="p-6 flex flex-col flex-grow bg-surface-container-low">
@@ -989,7 +1004,7 @@ useEffect(() => {
               <div className="anim-card relative rounded-[2rem] overflow-hidden shrink-0 snap-center w-[85vw] max-w-[360px] opacity-0 translate-y-[30px] duration-700 transition-all">
                 <div className="bg-surface-container-low/90 backdrop-blur-md border border-border-color rounded-[2rem] p-6 flex flex-col gap-5 h-[320px] relative">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Rahul" className="w-full h-full object-cover" src="/MyImages/rahul.webp"/></div>
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Rahul Sharma - Client Review for Siddharth Soni Website Designer" className="w-full h-full object-cover" src="/MyImages/rahul.webp"/></div>
                     <div className="flex flex-col"><span className="font-headline-md text-[18px] text-white font-semibold">Rahul Sharma</span><span className="font-code-sm text-[12px] text-primary">Cafe Owner, Jaipur</span></div>
                   </div>
                   <div className="flex text-primary">{[1,2,3,4,5].map(n=><span key={n} className="material-symbols-outlined text-[18px]" style={{fontVariationSettings:"'FILL' 1"}}>star</span>)}</div>
@@ -1007,7 +1022,7 @@ useEffect(() => {
               <div className="anim-card relative rounded-[2rem] overflow-hidden shrink-0 snap-center w-[85vw] max-w-[360px] opacity-0 translate-y-[30px] duration-700 transition-all">
                 <div className="bg-surface-container-low/90 backdrop-blur-md border border-border-color rounded-[2rem] p-6 flex flex-col gap-5 h-[320px] relative">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Emily" className="w-full h-full object-cover" src="/MyImages/emily.webp"/></div>
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Emily Chen - Client Review for Siddharth Soni Website Designer" className="w-full h-full object-cover" src="/MyImages/emily.webp"/></div>
                     <div className="flex flex-col"><span className="font-headline-md text-[18px] text-white font-semibold">Emily Chen</span><span className="font-code-sm text-[12px] text-primary">Startup Founder</span></div>
                   </div>
                   <div className="flex text-primary">{[1,2,3,4,5].map(n=><span key={n} className="material-symbols-outlined text-[18px]" style={{fontVariationSettings:"'FILL' 1"}}>star</span>)}</div>
@@ -1025,7 +1040,7 @@ useEffect(() => {
               <div className="anim-card relative rounded-[2rem] overflow-hidden shrink-0 snap-center w-[85vw] max-w-[360px] opacity-0 translate-y-[30px] duration-700 transition-all">
                 <div className="bg-surface-container-low/90 backdrop-blur-md border border-border-color rounded-[2rem] p-6 flex flex-col gap-5 h-[320px] relative">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Marcus" className="w-full h-full object-cover" src="/MyImages/marcus.webp"/></div>
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20 shrink-0"><img alt="Marcus JD - Client Review for Siddharth Soni Website Designer" className="w-full h-full object-cover" src="/MyImages/marcus.webp"/></div>
                     <div className="flex flex-col"><span className="font-headline-md text-[18px] text-white font-semibold">Marcus JD</span><span className="font-code-sm text-[12px] text-primary">Creative Director</span></div>
                   </div>
                   <div className="flex text-primary">{[1,2,3,4,5].map(n=><span key={n} className="material-symbols-outlined text-[18px]" style={{fontVariationSettings:"'FILL' 1"}}>star</span>)}</div>
@@ -1047,49 +1062,6 @@ useEffect(() => {
               )}
 
               </div>
-          </div>
-        </section>
-
-        {/* FAQ SECTION */}
-        <section className="relative z-20 bg-background px-5 lg:px-6 w-full py-16 border-t border-border-color observe-section" id="faq">
-          <div className="max-w-[900px] mx-auto w-full">
-            <div className="flex flex-col gap-2 mb-10">
-              <span className="font-code-sm text-[14px] text-primary tracking-widest uppercase flex items-center gap-2">
-                <span className="w-4 h-[1px] bg-primary"></span> FAQ
-              </span>
-              <h2 className="font-headline-lg text-[32px] text-white font-semibold tracking-tight">
-                Frequently Asked Questions
-              </h2>
-            </div>
-
-            <div className="flex flex-col gap-5">
-              <article className="p-6 rounded-2xl bg-surface-container-low/80 border border-border-color">
-                <h3 className="font-headline-md text-[20px] text-white font-semibold mb-3">
-                  How much does it cost to hire a developer for a website?
-                </h3>
-                <p className="font-body-md text-[16px] text-on-surface-variant font-light leading-relaxed">
-                  The cost varies based on project complexity. As a freelance website developer, I offer flexible pricing for everything from responsive landing pages to custom Shopify and E-commerce platforms.
-                </p>
-              </article>
-
-              <article className="p-6 rounded-2xl bg-surface-container-low/80 border border-border-color">
-                <h3 className="font-headline-md text-[20px] text-white font-semibold mb-3">
-                  What does a website developer do?
-                </h3>
-                <p className="font-body-md text-[16px] text-on-surface-variant font-light leading-relaxed">
-                  I build and maintain high-performance websites, focusing on seamless UI/UX design, custom animations, and conversion-optimized architecture to grow your business online.
-                </p>
-              </article>
-
-              <article className="p-6 rounded-2xl bg-surface-container-low/80 border border-border-color">
-                <h3 className="font-headline-md text-[20px] text-white font-semibold mb-3">
-                  Will AI replace web developers?
-                </h3>
-                <p className="font-body-md text-[16px] text-on-surface-variant font-light leading-relaxed">
-                  AI is a great tool, but it cannot replace the strategic thinking, custom UI/UX design, and complex performance optimization that a professional web designer brings to a brand.
-                </p>
-              </article>
-            </div>
           </div>
         </section>
 
