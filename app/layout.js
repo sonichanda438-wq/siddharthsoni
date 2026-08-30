@@ -83,6 +83,20 @@ export default function RootLayout({ children }) {
           content="RswM_njavESSbUgq2JCzXrqD_qKVSSFrmXGff4Loobo"
         />
         <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-M8E78F5997"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-M8E78F5997');
+            `,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
