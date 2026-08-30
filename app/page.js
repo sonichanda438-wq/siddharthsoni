@@ -206,6 +206,13 @@ export default function Portfolio() {
         setIsAudioLoading(true); // लोडिंग शुरू
         await audioRef.current.play();
         setIsPlaying(true);
+
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'music_played', {
+            event_category: 'Media',
+            event_label: 'Play Music Button'
+          });
+        }
       } catch (e) {
         console.log("Play blocked by mobile browser:", e);
         setIsPlaying(false);
@@ -505,6 +512,13 @@ useEffect(() => {
           body: gfData
         })
       ]);
+
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'message_sent', {
+          event_category: 'Contact',
+          event_label: 'Send Message Button'
+        });
+      }
 
       setMessageText("");
       setIsMessageOpen(false);
