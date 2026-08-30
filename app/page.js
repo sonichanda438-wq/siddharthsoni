@@ -836,18 +836,11 @@ useEffect(() => {
                     </div>
                     
                     <h1 className="font-display-xl text-[40px] lg:text-[64px] text-on-surface font-semibold tracking-tight leading-[1.1]">
-                      High-Performance Web Developer, <span className="text-primary">Designer</span> & <br/>
-                      <span className={`inline-block min-w-[300px] text-surface-tint transition-all duration-500 ${fadeRole ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[10px]'}`}>
-                        {roles[roleIndex]}
-                      </span>
+                      Siddharth Soni – Expert Freelance Website Designer & Developer
                     </h1>
 
                     <p className="font-body-lg text-[18px] text-on-surface-variant max-w-2xl leading-relaxed font-light">
-                      {subtitleWords.map((word, i) => (
-                        <span key={i} className="inline-block animate-fade-in-up opacity-0" style={{ animationDelay: `${i * 0.04}s`, animationFillMode: 'forwards' }}>
-                          {word}&nbsp;
-                        </span>
-                      ))}
+                      Crafting lightning-fast, highly converting custom websites and e-commerce stores in Jaipur and globally.
                     </p>
 
                     <div className="flex flex-wrap gap-3 mt-4">
@@ -904,7 +897,7 @@ useEffect(() => {
               <span className="font-code-sm text-[14px] text-primary tracking-widest uppercase flex items-center gap-2">
                 <span className="w-4 h-[1px] bg-primary"></span> Expertise & Featured Work
               </span>
-              <h2 className="font-headline-lg text-[32px] text-white font-semibold tracking-tight">Featured Projects</h2>
+              <h2 className="font-headline-lg text-[32px] text-white font-semibold tracking-tight">Premium Website Design & Development Services</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1054,6 +1047,49 @@ useEffect(() => {
               )}
 
               </div>
+          </div>
+        </section>
+
+        {/* FAQ SECTION */}
+        <section className="relative z-20 bg-background px-5 lg:px-6 w-full py-16 border-t border-border-color observe-section" id="faq">
+          <div className="max-w-[900px] mx-auto w-full">
+            <div className="flex flex-col gap-2 mb-10">
+              <span className="font-code-sm text-[14px] text-primary tracking-widest uppercase flex items-center gap-2">
+                <span className="w-4 h-[1px] bg-primary"></span> FAQ
+              </span>
+              <h2 className="font-headline-lg text-[32px] text-white font-semibold tracking-tight">
+                Frequently Asked Questions
+              </h2>
+            </div>
+
+            <div className="flex flex-col gap-5">
+              <article className="p-6 rounded-2xl bg-surface-container-low/80 border border-border-color">
+                <h3 className="font-headline-md text-[20px] text-white font-semibold mb-3">
+                  How much does it cost to hire a developer for a website?
+                </h3>
+                <p className="font-body-md text-[16px] text-on-surface-variant font-light leading-relaxed">
+                  The cost varies based on project complexity. As a freelance website developer, I offer flexible pricing for everything from responsive landing pages to custom Shopify and E-commerce platforms.
+                </p>
+              </article>
+
+              <article className="p-6 rounded-2xl bg-surface-container-low/80 border border-border-color">
+                <h3 className="font-headline-md text-[20px] text-white font-semibold mb-3">
+                  What does a website developer do?
+                </h3>
+                <p className="font-body-md text-[16px] text-on-surface-variant font-light leading-relaxed">
+                  I build and maintain high-performance websites, focusing on seamless UI/UX design, custom animations, and conversion-optimized architecture to grow your business online.
+                </p>
+              </article>
+
+              <article className="p-6 rounded-2xl bg-surface-container-low/80 border border-border-color">
+                <h3 className="font-headline-md text-[20px] text-white font-semibold mb-3">
+                  Will AI replace web developers?
+                </h3>
+                <p className="font-body-md text-[16px] text-on-surface-variant font-light leading-relaxed">
+                  AI is a great tool, but it cannot replace the strategic thinking, custom UI/UX design, and complex performance optimization that a professional web designer brings to a brand.
+                </p>
+              </article>
+            </div>
           </div>
         </section>
 
