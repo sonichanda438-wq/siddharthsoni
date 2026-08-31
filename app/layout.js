@@ -34,9 +34,23 @@ export const metadata = {
     description:
       "Looking for a website developer? I provide expert custom UI/UX, fast-loading frontend, and e-commerce website development services.",
     url: "https://siddharthsoni.pages.dev",
-    siteName: "S.S. Creative Portfolio",
+    siteName: "SS Creatives",
     type: "website",
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+};
+
+// WebSite structured data
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "SS Creatives",
+  "alternateName": "Siddharth Soni",
+  "url": "https://siddharthsoni.pages.dev/"
 };
 
 // FAQ structured data
@@ -98,6 +112,10 @@ export default function RootLayout({ children }) {
         />
         <script
           type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
@@ -108,4 +126,4 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   );
-}
+ }
