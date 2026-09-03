@@ -802,7 +802,7 @@ useEffect(() => {
                   <div className="h-full w-full px-5 lg:px-6 max-w-[1280px] mx-auto flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="font-headline-md text-[24px] text-primary tracking-tight font-semibold animate-text-reveal inline-block">
-                S.S. CREATIVE
+                S.S. Creative
               </span>
             </div>
             <nav className="hidden lg:flex items-center gap-6 animate-fade-in-up">
